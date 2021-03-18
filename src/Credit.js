@@ -6,7 +6,7 @@ export default function Credit() {
       <div className="col">
         <span className="name">
           <a
-            href="https://github.com/ssrome/weather-app"
+            href="https://github.com/ssrome/weather-react"
             rel="noreferrer"
             target="_blank"
           >
