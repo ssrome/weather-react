@@ -1,4 +1,5 @@
 import React from "react";
+import WeatherIcon from "./WeatherIcon";
 
 export default function TodaysForecast() {
   return (
@@ -7,9 +8,14 @@ export default function TodaysForecast() {
         <ul className="">
           <li className="todays-temp">8°C</li>
           <li id="todays-icon">
-            <span className="todaysEmoji" role="img" aria-label="weather-icon">
-              ☁️
-            </span>
+            <WeatherIcon
+              icon="01d"
+              description="weather"
+              iconClass="todays-weather-icon"
+            />
+            {/* <span className="todaysEmoji" role="img" aria-label="weather-icon"> */}
+
+            {/* </span> */}
           </li>
           <li className="description" id="description">
             Scattered clouds

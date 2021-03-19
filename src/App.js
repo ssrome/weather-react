@@ -3,6 +3,7 @@ import WeatherApp from "./WeatherApp";
 import Credit from "./Credit";
 import Footer from "./Footer";
 import "./App.css";
+import "./styles.css";
 
 export default function App() {
   return (
