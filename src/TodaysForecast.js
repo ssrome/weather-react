@@ -13,9 +13,6 @@ export default function TodaysForecast() {
               description="weather"
               iconClass="todays-weather-icon"
             />
-            {/* <span className="todaysEmoji" role="img" aria-label="weather-icon"> */}
-
-            {/* </span> */}
           </li>
           <li className="description" id="description">
             Scattered clouds

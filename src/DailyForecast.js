@@ -12,7 +12,6 @@ export default function DailyForecast(props) {
             description="weather"
             iconClass="daily-weather-icons"
           />
-          {/* <img src="" alt="" /> */}
         </li>
         <li className="temp">
           <span className="max-temp">{props.maxTemp}°</span> /{" "}
