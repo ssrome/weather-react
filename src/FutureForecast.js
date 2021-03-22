@@ -1,7 +1,7 @@
 import DailyForecast from "./DailyForecast";
 import React from "react";
 
-export default function FutureForecast() {
+export default function FutureForecast(props) {
   return (
     <div className="row">
       <div className="col five-day-forecast">

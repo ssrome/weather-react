@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Search() {
+  const [city, setCity] = useState("");
+
+  function updateCity(event) {
+    setCity(event.target.value);
+    console.log(city);
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
   }
@@ -25,6 +32,7 @@ export default function Search() {
                 aria-label="Search"
                 id="city-input"
                 autoComplete="off"
+                onChange={updateCity}
               />
             </div>
           </div>
