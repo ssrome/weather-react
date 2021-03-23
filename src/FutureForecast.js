@@ -6,7 +6,7 @@ export default function FutureForecast(props) {
     <div className="row">
       <div className="col five-day-forecast">
         <p className="future-heading">5 Day Forecast</p>
-        <div className="row forecast" id="forecast">
+        <div className="row forecast">
           <DailyForecast day="Fri" minTemp={6} maxTemp={11} icon="01d" />
           <DailyForecast day="Sat" minTemp={5} maxTemp={9} icon="02d" />
           <DailyForecast day="Sun" minTemp={5} maxTemp={11} icon="03d" />

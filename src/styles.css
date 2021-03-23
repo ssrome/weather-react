@@ -88,7 +88,7 @@ p.future-heading {
   font-size: 1.6em;
   font-weight: 600;
 }
-div#forecast.row {
+div.row.forecast {
   margin: 0 auto;
   text-align: center;
 }
@@ -100,6 +100,7 @@ div#forecast.row {
   font-family: "Roboto", sans-serif;
   font-size: 0.7em;
   margin: 0 auto;
+  padding: 0;
   width: 60px;
 }
 daily-weather-icons {

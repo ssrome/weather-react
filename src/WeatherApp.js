@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import axios from "axios";
 import TodaysForecast from "./TodaysForecast";
 import ChangeUnit from "./ChangeUnit";
 import FutureForecast from "./FutureForecast";
 //import DailyForecast from "./DailyForecast";
-import axios from "axios";
 
 export default function WeatherApp() {
   const units = "metric";
@@ -30,6 +30,8 @@ export default function WeatherApp() {
         feelsLike: response.data.main.feels_like,
         windSpeed: response.data.wind.speed,
         icon: response.data.weather[0].icon,
+        timestamp: new Date((response.data.dt + response.data.timezone) * 1000),
+        // timezone: response.data.timezone,
         description: response.data.weather[0].description,
         loaded: true,
       });
@@ -58,7 +60,6 @@ export default function WeatherApp() {
               <form
                 onSubmit={handleSubmit}
                 className="row gy-2 gx-3 align-items-center"
-                id="search-city"
               >
                 <div className="col-auto">
                   <div className="input-group">
@@ -71,24 +72,18 @@ export default function WeatherApp() {
                       className="form-control"
                       placeholder="Enter city"
                       aria-label="Search"
-                      id="city-input"
                       autoComplete="off"
                       onChange={updateCity}
                     />
                   </div>
                 </div>
                 <div className="col-auto">
-                  <button
-                    className="btn btn-primary"
-                    id="search-button"
-                    type="submit"
-                  >
+                  <button className="btn btn-primary" type="submit">
                     Search City
                   </button>
                 </div>
                 <div className="col-auto">
                   <button
-                    id="current-location"
                     className="btn btn-secondary current-location"
                     type="button"
                   >
@@ -108,13 +103,15 @@ export default function WeatherApp() {
             description={weatherData.description}
             windSpeed={roundNumber(weatherData.windSpeed * 2.237)}
             pressure={weatherData.pressure}
+            timestamp={weatherData.timestamp}
+            full={true}
           />
           <ChangeUnit />
           <FutureForecast />
           {/* <div className="row">
             <div className="col five-day-forecast">
               <p className="future-heading">5 Day Forecast</p>
-              <div className="row forecast" id="forecast">
+              <div className="row forecast">
                 <DailyForecast day="Fri" minTemp={6} maxTemp={11} icon="01d" />
                 <DailyForecast day="Sat" minTemp={5} maxTemp={9} icon="02d" />
                 <DailyForecast day="Sun" minTemp={5} maxTemp={11} icon="03d" />
