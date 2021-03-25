@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
-import TodaysForecast from "./TodaysForecast";
-import ChangeUnit from "./ChangeUnit";
+import CurrentWeather from "./CurrentWeather";
 import FutureForecast from "./FutureForecast";
-//import DailyForecast from "./DailyForecast";
+import UnitButtonText from "./UnitButtonText";
+import CurrentTemperature from "./CurrentTemperature";
+import WeatherIcon from "./WeatherIcon";
 
-export default function WeatherApp() {
-  const units = "metric";
-  const [city, setCity] = useState("London");
-  let apikey = `36f2435c265e75d4f4b5f9194c2525ab`;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apikey}`;
+export default function WeatherApp(props) {
+  const [city, setCity] = useState(props.defaultCity);
   const [weatherData, setWeatherData] = useState({ loaded: false });
+  const [unit, setUnit] = useState("Celsius");
 
   function updateCity(event) {
     setCity(event.target.value.trim());
@@ -31,14 +30,20 @@ export default function WeatherApp() {
         windSpeed: response.data.wind.speed,
         icon: response.data.weather[0].icon,
         timestamp: new Date((response.data.dt + response.data.timezone) * 1000),
-        // timezone: response.data.timezone,
         description: response.data.weather[0].description,
+        coords: {
+          lat: response.data.coord.lat,
+          lon: response.data.coord.lon,
+        },
         loaded: true,
       });
     }
   }
 
   function getWeather() {
+    let units = "metric";
+    let apikey = `36f2435c265e75d4f4b5f9194c2525ab`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apikey}`;
     axios
       .get(apiUrl)
       .then(weatherResponse)
@@ -47,10 +52,21 @@ export default function WeatherApp() {
       });
   }
 
+  function convertTemperature(event) {
+    event.preventDefault();
+
+    if (unit === "Celsius") {
+      setUnit("Fahrenheit");
+    } else {
+      setUnit("Celsius");
+    }
+  }
+
   function handleSubmit(event, city) {
     event.preventDefault();
     getWeather(city);
   }
+
   if (weatherData.loaded) {
     return (
       <div className="row app">
@@ -61,11 +77,10 @@ export default function WeatherApp() {
                 onSubmit={handleSubmit}
                 className="row gy-2 gx-3 align-items-center"
               >
-                <div className="col-auto">
+                <div className="col-9 col-lg-9 col-md-9 col-sm-7">
                   <div className="input-group">
                     <div className="input-group-text">
                       <i className="fas fa-search"></i>
-                      <i className="bi bi-search"></i>
                     </div>
                     <input
                       type="search"
@@ -82,44 +97,53 @@ export default function WeatherApp() {
                     Search City
                   </button>
                 </div>
-                <div className="col-auto">
-                  <button
-                    className="btn btn-secondary current-location"
-                    type="button"
-                  >
-                    Current Location
-                  </button>
-                </div>
               </form>
             </div>
           </div>
+          <div className="row todays-forecast">
+            <div className="col">
+              <ul>
+                <CurrentTemperature
+                  temperature={weatherData.temperature}
+                  unit={unit}
+                />
+                <li>
+                  <WeatherIcon
+                    icon={weatherData.icon}
+                    description={weatherData.description}
+                    iconClass="todays-weather-icon"
+                  />
+                </li>
+                <li className="description">{weatherData.description}</li>
+              </ul>
+            </div>
+            <CurrentWeather
+              city={weatherData.cityResponse}
+              humidity={weatherData.humidity}
+              icon={weatherData.icon}
+              description={weatherData.description}
+              windSpeed={roundNumber(weatherData.windSpeed * 2.237)}
+              pressure={weatherData.pressure}
+              timestamp={weatherData.timestamp}
+              full={true}
+            />
+          </div>
 
-          <TodaysForecast
-            city={weatherData.cityResponse}
-            temperature={roundNumber(weatherData.temperature)}
-            feelsLikeTemp={roundNumber(weatherData.feelsLike)}
-            humidity={weatherData.humidity}
-            icon={weatherData.icon}
-            description={weatherData.description}
-            windSpeed={roundNumber(weatherData.windSpeed * 2.237)}
-            pressure={weatherData.pressure}
-            timestamp={weatherData.timestamp}
-            full={true}
-          />
-          <ChangeUnit />
-          <FutureForecast />
-          {/* <div className="row">
-            <div className="col five-day-forecast">
-              <p className="future-heading">5 Day Forecast</p>
-              <div className="row forecast">
-                <DailyForecast day="Fri" minTemp={6} maxTemp={11} icon="01d" />
-                <DailyForecast day="Sat" minTemp={5} maxTemp={9} icon="02d" />
-                <DailyForecast day="Sun" minTemp={5} maxTemp={11} icon="03d" />
-                <DailyForecast day="Mon" minTemp={7} maxTemp={10} icon="04d" />
-                <DailyForecast day="Tues" minTemp={4} maxTemp={11} icon="09d" />
+          {/* <ChangeUnit /> */}
+          <div className="row">
+            <div className="col">
+              <div className="change-unit">
+                <button
+                  type="button"
+                  onClick={convertTemperature}
+                  className="btn btn-primary mb-3"
+                >
+                  <UnitButtonText unit={unit} />
+                </button>
               </div>
             </div>
-          </div> */}
+          </div>
+          <FutureForecast coords={weatherData.coords} />
         </div>
       </div>
     );
