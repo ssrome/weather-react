@@ -29,7 +29,7 @@ export default function WeatherApp(props) {
         feelsLike: response.data.main.feels_like,
         windSpeed: response.data.wind.speed,
         icon: response.data.weather[0].icon,
-        timestamp: new Date((response.data.dt + response.data.timezone) * 1000),
+        timestamp: new Date(response.data.dt * 1000),
         description: response.data.weather[0].description,
         coords: {
           lat: response.data.coord.lat,
