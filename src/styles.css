@@ -59,6 +59,7 @@ img.todays-weather-icon {
 }
 .additional-info {
   font-size: 0.7em;
+  margin: 15px 0 0;
   text-align: left;
 }
 .todays-temp {

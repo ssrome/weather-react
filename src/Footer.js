@@ -7,11 +7,19 @@ export default function Footer() {
         <p>
           <span className="photo-credit">
             Background image by{" "}
-            <a href="https://pixabay.com/photos/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=731260">
+            <a
+              href="https://pixabay.com/photos/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=731260"
+              rel="noreferrer"
+              target="_blank"
+            >
               Free-Photos
             </a>{" "}
             from{" "}
-            <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=731260">
+            <a
+              href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=731260"
+              rel="noreferrer"
+              target="_blank"
+            >
               Pixabay
             </a>
           </span>

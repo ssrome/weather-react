@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import CurrentWeather from "./CurrentWeather";
-import FutureForecast from "./FutureForecast";
+//import FutureForecast from "./FutureForecast";
 import UnitButtonText from "./UnitButtonText";
 import CurrentTemperature from "./CurrentTemperature";
 import WeatherIcon from "./WeatherIcon";
@@ -143,7 +143,7 @@ export default function WeatherApp(props) {
               </div>
             </div>
           </div>
-          <FutureForecast coords={weatherData.coords} />
+          {/* <FutureForecast coords={weatherData.coords} /> */}
         </div>
       </div>
     );
