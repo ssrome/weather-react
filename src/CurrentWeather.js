@@ -19,7 +19,7 @@ export default function CurrentWeather(props) {
       <ul className="additional-info">
         <li className="city">{props.city}</li>
         <li>
-          Local time:{" "}
+          Updated:{" "}
           <Date timestamp={props.timestamp.getDay()} full={props.full} />{" "}
           {formatTime(props.timestamp)}
         </li>
