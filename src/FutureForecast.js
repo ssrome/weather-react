@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DailyForecast from "./DailyForecast";
 import axios from "axios";
 
 export default function FutureForecast(props) {
-  // const [coords, setCoords] = useState({});
-
-  // function updateCoords(event) {
-  //   setCoords({
-  //     lat: props.coords.lat,
-  //     long: props.coords.lon,
-  //   });
-  // }
+  useEffect(() => {
+    setLoaded(false);
+  }, [props.coords]);
 
   const [forecastData, setForecastData] = useState(null);
   const [loaded, setLoaded] = useState(false);
