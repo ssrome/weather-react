@@ -3,15 +3,14 @@ import WeatherIcon from "./WeatherIcon";
 import Date from "./Date";
 
 export default function DailyForecast(props) {
-
   function roundNumber(num) {
     return Math.round(num);
   }
-    return (
+  return (
     <div className="col-2 daily">
       <ul className="forecast-elements">
         <li className="day">
-        <Date timestamp={props.timestamp.getDay()} full={false} />
+          <Date timestamp={props.timestamp.getDay()} full={false} />
         </li>
         <li>
           <WeatherIcon
