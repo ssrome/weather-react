@@ -1,6 +1,6 @@
 # Weather React App
 
-A basic to-do app that performs CRUD operations locally. A singular list will be saved to local storage.
+A weather app that shows the current weather and forecast by searching for a city.
 
 ## Installation
 
